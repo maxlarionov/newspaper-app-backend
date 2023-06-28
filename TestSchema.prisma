@@ -37,10 +37,12 @@ model Tag {
 }
 
 model TagsOnArticles {
-  article   Article @relation(fields: [articleId], references: [id])
-  articleId String
-  tag       Tag     @relation(fields: [tagId], references: [id])
-  tagId     String
+  article    Article  @relation(fields: [articleId], references: [id])
+  articleId  String
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  tagId      String
+  assignedAt DateTime @default(now())
+  assignedBy String
 
   @@id([articleId, tagId])
 }
