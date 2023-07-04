@@ -1,5 +1,11 @@
 const { prisma } = require('../prisma/prisma-client')
 
+/**
+ * 
+ * @route GET /api/articles
+ * @desc Отримання усіх статей
+ * @access Public 
+ */
 const getAllArticles = async (req, res) => {
 	try {
 		const articles = await prisma.article.findMany()
@@ -10,6 +16,12 @@ const getAllArticles = async (req, res) => {
 	}
 }
 
+/**
+ * 
+ * @route GET /api/articles/:id
+ * @desc Отримання однієї статті
+ * @access Public 
+ */
 const getArticle = async (req, res) => {
 	try {
 		const { id } = req.params
@@ -25,6 +37,12 @@ const getArticle = async (req, res) => {
 	}
 }
 
+/**
+ * 
+ * @route POST /api/articles/add
+ * @desc Додавання статті
+ * @access Private 
+ */
 const addArticle = async (req, res) => {
 	try {
 		const data = req.body
@@ -36,7 +54,7 @@ const addArticle = async (req, res) => {
 		const article = await prisma.article.create({
 			data: {
 				...data,
-				userId: req.user.id
+				userId: req.user.id,
 			}
 		})
 
@@ -46,6 +64,12 @@ const addArticle = async (req, res) => {
 	}
 }
 
+/**
+ * 
+ * @route POST /api/articles/remove/:id
+ * @desc Видалення статті
+ * @access Private 
+ */
 const removeArticle = async (req, res) => {
 	try {
 		const { id } = req.body
@@ -62,6 +86,12 @@ const removeArticle = async (req, res) => {
 	}
 }
 
+/**
+ * 
+ * @route PUT /api/articles/edit/:id
+ * @desc Редагування статті
+ * @access Private 
+ */
 const editArticle = async (req, res) => {
 	try {
 		const data = req.body

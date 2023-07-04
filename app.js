@@ -7,6 +7,7 @@ require('dotenv').config()
 
 const usersRouter = require('./routes/users')
 const articlesRouter = require('./routes/articles')
+const tagsRouter = require('./routes/tags')
 
 const app = express()
 
@@ -17,5 +18,6 @@ app.use(cookieParser())
 
 app.use('/api/users', usersRouter)
 app.use('/api/articles', articlesRouter)
+app.use('/api/tags', tagsRouter)
 
 module.exports = app
