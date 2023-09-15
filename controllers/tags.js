@@ -25,13 +25,21 @@ const getAllTags = async (req, res) => {
 const getTag = async (req, res) => {
 	try {
 		const { id } = req.params
-		const tag = await prisma.tag.findUnique({
+
+		const articles = await prisma.article.findMany({
+			include: {
+				tags: true
+			},
 			where: {
-				id
+				tags: {
+					some: {
+						tagId: id
+					}
+				}
 			}
 		})
 
-		res.status(200).json(tag)
+		res.status(200).json(articles)
 	} catch (err) {
 		res.status(500).json({ message: 'Не вийшло отримати тег' })
 	}
