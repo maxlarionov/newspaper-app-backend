@@ -22,7 +22,7 @@ const getAllTags = async (req, res) => {
  * @desc Отримання одного тега
  * @access Public 
  */
-const getTag = async (req, res) => {
+const getArticlesByTag = async (req, res) => {
 	try {
 		const { id } = req.params
 
@@ -124,7 +124,7 @@ const editTag = async (req, res) => {
 
 module.exports = {
 	getAllTags,
-	getTag,
+	getArticlesByTag,
 	addTag,
 	removeTag,
 	editTag

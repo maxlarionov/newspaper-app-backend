@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const { getAllTags, getTag, addTag, removeTag, editTag } = require('../controllers/tags')
+const { getAllTags, getArticlesByTag, addTag, removeTag, editTag } = require('../controllers/tags')
 const { auth } = require('../middleware/auth')
 
 /* /api/tags/ */
 router.get('/', getAllTags)
 /* /api/tags/:id */
-router.get('/:id', getTag)
+router.get('/:id', getArticlesByTag)
 /* /api/tags/add */
 router.post('/add', auth, addTag)
 /* /api/tags/remove:id */
