@@ -25,13 +25,16 @@ const getAllArticles = async (req, res) => {
 const getArticle = async (req, res) => {
 	try {
 		const { id } = req.params
+		const tags = req.tags
 		const article = await prisma.article.findUnique({
 			where: {
 				id
-			}
+			},
 		})
 
-		res.status(200).json(article)
+		const articleAndTags = { article, tags }
+
+		res.status(200).json(articleAndTags)
 	} catch (err) {
 		res.status(500).json({ message: 'Не вийшло отримати статтю' })
 	}
