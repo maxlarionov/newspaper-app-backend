@@ -13,7 +13,7 @@ const login = async (req, res, next) => {
 		const { email, password, name } = req.body
 
 		if (!email || !password) {
-			return res.status(400).json({ message: 'Будь ласка, заповніть усі поля' })
+			return res.status(400).json({ message: 'Please fill in all fields' })
 		}
 
 		const user = await prisma.user.findFirst({
@@ -34,10 +34,10 @@ const login = async (req, res, next) => {
 				token: jwt.sign({ id: user.id }, secret, { expiresIn: '30d' })
 			})
 		} else {
-			return res.status(400).json({ message: 'Невірний логін або пароль' })
+			return res.status(400).json({ message: 'Incorrect login or password' })
 		}
 	} catch (error) {
-		res.status(500).json({ message: 'Щось пішло не так' })
+		res.status(500).json({ message: 'Something went wrong' })
 	}
 }
 
@@ -52,7 +52,7 @@ const register = async (req, res, next) => {
 		const { email, password, name } = req.body
 
 		if (!email || !password || !name) {
-			return res.status(400).json({ message: 'Будь ласка, заповніть усі поля' })
+			return res.status(400).json({ message: 'Please fill in all fields' })
 		}
 
 		const registeredUser = await prisma.user.findFirst({
@@ -62,7 +62,7 @@ const register = async (req, res, next) => {
 		})
 
 		if (registeredUser) {
-			return res.status(400).json({ message: 'Користувач з таким email вже існує' })
+			return res.status(400).json({ message: 'A user with this email already exists' })
 		}
 
 		const salt = await bсrypt.genSalt(10)
@@ -86,11 +86,11 @@ const register = async (req, res, next) => {
 				token: jwt.sign({ id: user.id }, secret, { expiresIn: '10d' })
 			})
 		} else {
-			return res.status(400).json({ message: 'Створити користувача не вийшло' })
+			return res.status(400).json({ message: 'User creation failed' })
 		}
 
 	} catch (err) {
-		res.status(500).json({ message: 'Щось пішло не так' })
+		res.status(500).json({ message: 'Something went wrong' })
 	}
 }
 

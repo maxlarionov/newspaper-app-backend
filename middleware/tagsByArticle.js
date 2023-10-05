@@ -21,7 +21,7 @@ const tagsByArticle = async (req, res, next) => {
 
 		next()
 	} catch (error) {
-		res.status(401).json({ message: 'Не авторизован' })
+		res.status(401).json({ message: 'Not logged in' })
 	}
 }
 

@@ -12,7 +12,7 @@ const getAllArticles = async (req, res) => {
 
 		res.status(200).json(articles)
 	} catch (err) {
-		res.status(500).json({ message: 'Не вийшло отримати список статті' })
+		res.status(500).json({ message: 'Failed to get list of articles' })
 	}
 }
 
@@ -36,7 +36,7 @@ const getArticle = async (req, res) => {
 
 		res.status(200).json(articleAndTags)
 	} catch (err) {
-		res.status(500).json({ message: 'Не вийшло отримати статтю' })
+		res.status(500).json({ message: 'Failed to get article' })
 	}
 }
 
@@ -51,7 +51,7 @@ const addArticle = async (req, res) => {
 		const data = req.body
 
 		if (!data.title || !data.text || !data.picture || !data.time) {
-			return res.status(400).json({ message: 'Будь ласка, заповніть усі поля' })
+			return res.status(400).json({ message: 'Please fill in all fields' })
 		}
 
 		const article = await prisma.article.create({
@@ -63,7 +63,7 @@ const addArticle = async (req, res) => {
 
 		res.status(201).json(article)
 	} catch (err) {
-		res.status(500).json({ message: 'Не вийшло додати статтю' })
+		res.status(500).json({ message: 'Failed to add article' })
 	}
 }
 
@@ -83,9 +83,9 @@ const removeArticle = async (req, res) => {
 			}
 		})
 
-		res.status(200).json({ message: 'Стаття видалена' })
+		res.status(200).json({ message: 'Article removed' })
 	} catch (err) {
-		res.status(500).json({ message: 'Не вийшло видалити статтю' })
+		res.status(500).json({ message: 'Failed to remove article' })
 	}
 }
 
@@ -101,7 +101,7 @@ const editArticle = async (req, res) => {
 		const id = data.id
 
 		if (!data.title || !data.text || !data.picture || !data.time) {
-			return res.status(400).json({ message: 'Будь ласка, заповніть усі поля' })
+			return res.status(400).json({ message: 'Please fill in all fields' })
 		}
 
 		await prisma.article.update({
@@ -111,9 +111,9 @@ const editArticle = async (req, res) => {
 			data
 		})
 
-		res.status(200).json({ message: 'Статтю відредаговано' })
+		res.status(200).json({ message: 'Article edited' })
 	} catch (err) {
-		res.status(500).json({ message: 'Не вийшло відредагувати статтю' })
+		res.status(500).json({ message: 'Failed to edit article' })
 	}
 }
 

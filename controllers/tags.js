@@ -12,7 +12,7 @@ const getAllTags = async (req, res) => {
 
 		res.status(200).json(tags)
 	} catch (err) {
-		res.status(500).json({ message: 'Не вийшло отримати список тегів' })
+		res.status(500).json({ message: 'Failed to get the tags' })
 	}
 }
 
@@ -41,7 +41,7 @@ const getArticlesByTag = async (req, res) => {
 
 		res.status(200).json(articles)
 	} catch (err) {
-		res.status(500).json({ message: 'Не вийшло отримати тег' })
+		res.status(500).json({ message: 'Failed to get the articles' })
 	}
 }
 
@@ -56,7 +56,7 @@ const addTag = async (req, res) => {
 		const data = req.body
 
 		if (!data.name) {
-			return res.status(400).json({ message: 'Будь ласка, назвіть тег' })
+			return res.status(400).json({ message: 'Please name the tag' })
 		}
 
 		const tag = await prisma.tag.create({
@@ -67,7 +67,7 @@ const addTag = async (req, res) => {
 
 		res.status(201).json(tag)
 	} catch (err) {
-		res.status(500).json({ message: 'Не вийшло додати тег' })
+		res.status(500).json({ message: 'Failed to get the tag' })
 	}
 }
 
@@ -87,9 +87,9 @@ const removeTag = async (req, res) => {
 			}
 		})
 
-		res.status(200).json({ message: 'Тег видален' })
+		res.status(200).json({ message: 'Tag removed' })
 	} catch (err) {
-		res.status(500).json({ message: 'Не вийшло видалити тег' })
+		res.status(500).json({ message: 'Failed to remove tag' })
 	}
 }
 
@@ -105,7 +105,7 @@ const editTag = async (req, res) => {
 		const id = data.id
 
 		if (!data.name) {
-			return res.status(400).json({ message: 'Будь ласка, назвіть тег' })
+			return res.status(400).json({ message: 'Please name the tag' })
 		}
 
 		await prisma.tag.update({
@@ -115,9 +115,9 @@ const editTag = async (req, res) => {
 			data
 		})
 
-		res.status(200).json({ message: 'Тег відредаговано' })
+		res.status(200).json({ message: 'Tag edited' })
 	} catch (err) {
-		res.status(500).json({ message: 'Не вийшло відредагувати тег' })
+		res.status(500).json({ message: 'Failed to edit tag' })
 	}
 }
 
