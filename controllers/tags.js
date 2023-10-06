@@ -3,7 +3,7 @@ const { prisma } = require('../prisma/prisma-client')
 /**
  * 
  * @route GET /api/tags
- * @desc Отримання усіх тегів
+ * @desc Get tags
  * @access Public 
  */
 const getAllTags = async (req, res) => {
@@ -19,7 +19,7 @@ const getAllTags = async (req, res) => {
 /**
  * 
  * @route GET /api/tags/:id
- * @desc Отримання одного тега
+ * @desc Get article by tag
  * @access Public 
  */
 const getArticlesByTag = async (req, res) => {
@@ -48,7 +48,7 @@ const getArticlesByTag = async (req, res) => {
 /**
  * 
  * @route POST /api/tags/add
- * @desc Додавання тега
+ * @desc Add tag
  * @access Private 
  */
 const addTag = async (req, res) => {
@@ -74,7 +74,7 @@ const addTag = async (req, res) => {
 /**
  * 
  * @route POST /api/tags/remove/:id
- * @desc Видалення тега
+ * @desc Remove tag
  * @access Private
  */
 const removeTag = async (req, res) => {
@@ -96,7 +96,7 @@ const removeTag = async (req, res) => {
 /**
  * 
  * @route PUT /api/tags/edit/:id
- * @desc Редагування тега
+ * @desc Edit tag
  * @access Private
  */
 const editTag = async (req, res) => {

@@ -3,7 +3,7 @@ const { prisma } = require('../prisma/prisma-client')
 /**
  * 
  * @route GET /api/articles
- * @desc Отримання усіх статей
+ * @desc Get articles
  * @access Public 
  */
 const getAllArticles = async (req, res) => {
@@ -19,7 +19,7 @@ const getAllArticles = async (req, res) => {
 /**
  * 
  * @route GET /api/articles/:id
- * @desc Отримання однієї статті
+ * @desc Get article
  * @access Public 
  */
 const getArticle = async (req, res) => {
@@ -43,7 +43,7 @@ const getArticle = async (req, res) => {
 /**
  * 
  * @route POST /api/articles/add
- * @desc Додавання статті
+ * @desc Add article
  * @access Private 
  */
 const addArticle = async (req, res) => {
@@ -70,7 +70,7 @@ const addArticle = async (req, res) => {
 /**
  * 
  * @route POST /api/articles/remove/:id
- * @desc Видалення статті
+ * @desc Remove article
  * @access Private 
  */
 const removeArticle = async (req, res) => {
@@ -92,7 +92,7 @@ const removeArticle = async (req, res) => {
 /**
  * 
  * @route PUT /api/articles/edit/:id
- * @desc Редагування статті
+ * @desc Edit article
  * @access Private 
  */
 const editArticle = async (req, res) => {

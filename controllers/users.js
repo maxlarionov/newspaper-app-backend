@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 /**
  * 
  * @route POST /api/user/login
- * @desc Логін
+ * @desc Login
  * @access Public 
  */
 const login = async (req, res, next) => {
@@ -44,7 +44,7 @@ const login = async (req, res, next) => {
 /**
  * 
  * @route POST /api/user/register 
- * @desc Реєстрація
+ * @desc Register
  * @access Public
  */
 const register = async (req, res, next) => {
@@ -97,16 +97,39 @@ const register = async (req, res, next) => {
 /**
  * 
  * @route GET /api/user/current 
- * @desc Поточний користувач
+ * @desc Current user
  * @access Private
  */
 const current = async (req, res, next) => {
 	return res.status(200).json(req.user)
 }
 
+/**
+ * 
+ * @route POST /api/users/remove/:id
+ * @desc Remove user
+ * @access Private
+ */
+const removeUser = async (req, res, next) => {
+	try {
+		const { id } = req.body
+
+		await prisma.user.delete({
+			where: {
+				id
+			}
+		})
+
+		res.status(200).json({ message: 'User removed' })
+	} catch (err) {
+		res.status(500).json({ message: 'Something went wrong' })
+	}
+}
+
 module.exports = {
 	login,
 	register,
-	current
+	current,
+	removeUser
 }
 
