@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const cors = require('cors')
 const multer = require('multer')
+const fs = require('fs')
 
 require('dotenv').config()
 
@@ -36,6 +37,20 @@ app.use('/api/tags', tagsRouter)
 app.use('/api/upload', upload.single('image'), (req, res) => {
 	res.json({
 		url: `/api/uploads/${req.file.originalname}`
+	})
+})
+app.use('/api/image/:imageName', (req, res) => {
+	const { imageName } = req.params
+	const filePath = `./uploads/${imageName}`
+	console.log(imageName)
+
+	fs.unlink(filePath, (err) => {
+		if (err) {
+			console.error('Error:', err)
+			res.status(500).json({ message: 'Failed to remove image' })
+		} else {
+			res.status(200).json({ message: 'Image removed' })
+		}
 	})
 })
 app.use('/api/uploads', express.static('uploads'))
